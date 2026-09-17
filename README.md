@@ -33,6 +33,28 @@
 - **Express BFF**: `/api/route` の入力検証、ORS APIキーの秘匿、OpenRouteServiceへのリクエスト、エラーのHTTPレスポンス変換を担当します。
 - **通信経路**: ローカル開発時はViteのプロキシ、Docker Compose時はNginxのリバースプロキシを経由してExpressへ接続します。
 
+## ディレクトリ構成
+
+主要ファイルのみ記載
+
+├── server/                 # バックエンド（BFF / APIプロキシ）
+│   ├── Dockerfile          # Node.js / Express実行用コンテナ設定
+│   ├── server.js           # ORS APIへの通信中継・APIキーの秘匿
+│   └── server.test.js      # APIのバリデーション・通信・エラーハンドリングのテスト
+│
+├── src/                    # フロントエンド（React / Vite）
+│   ├── api/                # API通信・ブラウザ位置情報API
+│   ├── components/         # Map、CourseList、SearchFormなどのUIコンポーネント
+│   ├── hooks/              # 位置情報監視などのカスタムフック
+│   ├── utils/              # ルート座標の整形・所要時間計算・エラー処理
+│   ├── App.jsx             # アプリ全体のレイアウトと状態管理
+│   └── main.jsx            # Reactアプリケーションのエントリーポイント
+│
+├── Dockerfile              # フロントエンドのビルド・Nginx配信用設定
+├── docker-compose.yml      # フロントエンド・バックエンドの一括起動設定
+├── nginx.conf              # 静的ファイル配信・APIリバースプロキシ設定
+└── .env.example            # 環境変数のひな形
+
 ## 動作要件
 
 - Node.js 22.12以上
