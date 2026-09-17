@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./server #スコープ
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

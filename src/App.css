@@ -1,0 +1,315 @@
+:root {
+  --app-green-dark: #1f6b43;
+  --app-green: #2f9960;
+  --app-green-hover: #24794b;
+  --app-green-focus: #77c697;
+  --app-text: #315b42;
+  --app-label: #3b5b48;
+  --app-field-text: #244c34;
+  --app-border: #d1e4d8;
+  --app-border-soft: #b9d5c1;
+  --app-surface: #ffffff;
+  --app-surface-soft: #f1f8f3;
+  --app-surface-field: #fbfefc;
+  --app-surface-page: #f7fbf8;
+  --app-surface-panel: #edf7f0;
+  --app-map: #e5f0e8;
+  --app-radius: 12px;
+  --app-control-radius: 8px;
+  --app-shadow: 0 8px 20px rgba(31, 107, 67, 0.08);
+  --app-card-shadow: 0 6px 16px rgba(31, 107, 67, 0.07);
+}
+
+.app-layout,
+.app-layout *,
+.app-layout *::before,/*疑似要素を指定*/
+.app-layout *::after {
+  box-sizing: border-box;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 34%) minmax(0, 1fr);/*frは比率*/
+  min-height: calc(100svh - 80px);/*svhはアドレスバー、ツールバーを含めない｜-80pxはheaderを除く*/
+  background: var(--app-surface-page);
+  text-align: left;
+}
+
+header {
+  padding: 22px clamp(20px, 3vw, 32px);/*clampは順に最小、推奨、最大定める｜vwは横幅の％*/
+  color: var(--app-green-dark);
+  background: #f5faf6;
+  border-bottom: 1px solid #d7e5dc;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -0.4px;
+  overflow-wrap: anywhere;/*anywhereは文字単位*/
+}
+
+.left-panel,
+.detail-panel {
+  min-width: 0;
+  padding: 24px;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--app-surface-panel);
+  border-right: 1px solid var(--app-border);
+}
+
+.left-panel form,
+.back-loading {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);/*順にx,y，ぼかし*/
+}
+
+.left-panel form h2 {
+  margin-bottom: 2px;
+}
+
+.left-panel label {
+  margin-top: 2px;
+  color: var(--app-label);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.left-panel select {
+  width: 100%;
+  height: 44px;
+  padding: 10px 12px;
+  color: var(--app-field-text);
+  background: var(--app-surface-field);
+  border: 1px solid var(--app-border-soft);
+  border-radius: var(--app-control-radius);
+  font: inherit;
+  font-size: 15px;
+  line-height: 130%;
+}
+
+.left-panel select:focus {/*疑似クラスの指定*/
+  outline: 2px solid var(--app-green-focus);/*要素の外周*/
+  outline-offset: 1px;/*外周との隙間*/
+  border-color: #3fa66b;
+}
+
+.left-panel button {
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--app-surface);
+  background: var(--app-green);
+  border: 1px solid var(--app-green);
+  border-radius: var(--app-control-radius);
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 130%;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.left-panel button:hover {
+  background: var(--app-green-hover);
+  border-color: var(--app-green-hover);
+}
+
+.left-panel button:focus-visible {
+  outline: 2px solid var(--app-green-focus);
+  outline-offset: 2px;
+}
+
+.loading,
+.error {
+  margin: 0;
+  padding: 18px 10px;
+  color: var(--app-green-dark);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 130%;
+  text-align: center;
+}
+
+.course-list {
+  display: grid;
+  gap: 12px;
+}
+
+.course-card {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-card-shadow);
+}
+
+.course-card article {
+  display: grid;
+  gap: 4px;
+}
+
+.course-card h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-size: 15px;
+  line-height: 135%;
+}
+
+.course-card h2:first-child {/*一番最初の要素*/
+  margin-bottom: 2px;
+  color: var(--app-green-dark);
+  font-size: 18px;
+}
+
+.course-list > button {/*>は直下を対象にする*/
+  color: #2f7f52;
+  background: var(--app-surface);
+  border-color: var(--app-border-soft);
+}
+
+.course-list > button:hover {
+  color: var(--app-surface);
+  background: var(--app-green);
+  border-color: var(--app-green);
+}
+
+.btn-text-PC {
+  display: inline;
+}
+
+.btn-text-mobile {
+  display: none;
+}
+
+.detail-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 16px;
+  background: var(--app-surface);
+}
+
+.detail-panel article {
+  display: grid;
+  gap: 4px;
+  padding: 18px 20px;
+  color: var(--app-text);
+  background: var(--app-surface-soft);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.detail-panel .leaflet-container {
+  width: 100%;
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--app-map);
+  border: 1px solid #c9ded0;
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+@media (max-width: 760px) {
+  .app-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  header {
+    padding: 18px 16px;
+    font-size: clamp(20px, 6vw, 23px);
+  }
+
+  .left-panel,
+  .detail-panel {
+    padding: 16px;
+  }
+
+  .left-panel {
+    order: 2;
+    border-right: 0;
+    border-bottom: 1px solid var(--app-border);
+  }
+
+  .detail-panel {
+    order: 1;
+    display: none;
+    gap: 12px;
+  }
+
+  .left-panel form,
+  .back-loading {
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .course-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .course-card {
+    display: flex;
+    gap: 4px;
+  }
+
+  .course-card article {
+    display: none;
+  }
+
+  .course-card button {
+    width: 100%;
+    padding: 10px 4px;
+    font-size: 13px;
+  }
+
+  .btn-text-PC {
+    display: none;
+  }
+
+  .btn-text-mobile {
+    display: inline;
+  }
+
+  .course-list > button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .detail-panel:has(.leaflet-container) {/*hasで条件分岐*/
+    display: grid;
+  }
+
+  .detail-panel .leaflet-container {
+    height: clamp(320px, 62svh, 420px) !important;/*!importantは最優先で適用する｜leafletをねじ伏せる*/
+    min-height: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .left-panel,
+  .detail-panel {
+    padding: 12px;
+  }
+
+  .left-panel form,
+  .back-loading,
+  .course-card,
+  .detail-panel article {
+    padding: 14px;
+  }
+}
