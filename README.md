@@ -49,7 +49,7 @@ APIキーの取得条件、利用制限、料金については、OpenRouteServi
 ### 1. 依存関係をインストール
 
 ```bash
-git clone <リポジトリURL>
+git clone https:github.com/nanisu1122-hue/running-course-app.git
 cd running-course-app
 npm ci
 cd server
