@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
-import { searchRoute } from "./ORS.js";
+import { searchRoute } from "./ors.js";
 
 describe("ルート検索APIクライアントのテスト", () => {
   afterEach(() => {

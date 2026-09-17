@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { watchCurrentLocation, stopWatchingLocation } from "../API/location";
+import { watchCurrentLocation, stopWatchingLocation } from "../api/location";
 
 export function useLocationWatcher(enabled, onError) {
   const [currentLocation, setCurrentLocation] = useState(null);

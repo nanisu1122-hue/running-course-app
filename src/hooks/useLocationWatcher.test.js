@@ -4,9 +4,9 @@ import { useLocationWatcher } from "./useLocationWatcher.js";
 import {
   stopWatchingLocation,
   watchCurrentLocation,
-} from "../API/location.js";
+} from "../api/location.js";
 
-vi.mock("../API/location.js", () => ({
+vi.mock("../api/location.js", () => ({
   stopWatchingLocation: vi.fn(),
   watchCurrentLocation: vi.fn(),
 }));
