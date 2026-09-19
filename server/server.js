@@ -115,7 +115,26 @@ app.use((error, req, res, next) => {
     });
   }
 
-  return next(error);
+  if (res.headersSent) {
+    return next(error);
+  }
+
+  const status =
+    Number.isInteger(error?.status) && error.status >= 400 && error.status <= 599
+      ? error.status
+      : 500;
+  const isClientError = status < 500;
+
+  if (!isClientError) {
+    console.error("Unhandled server error:", error);
+  }
+
+  return res.status(status).json({
+    type: isClientError ? "INPUT" : "SERVER_ERROR",
+    message: isClientError
+      ? "リクエストを処理できませんでした。入力内容を確認してください。"
+      : "サーバー内部でエラーが発生しました。",
+  });
 });
 
 // NODE_ENVはどの環境で稼働しているかを表す

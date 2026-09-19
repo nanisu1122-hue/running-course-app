@@ -34,7 +34,6 @@ export function getCurrentLocation() {
         });
       },
       (error) => {
-        console.error(error);
         reject(createGeolocationError(error));
       },
       {
@@ -63,7 +62,6 @@ export function watchCurrentLocation(onSuccess, onError) {
       });
     },
     (error) => {
-      console.error(error);
       onError?.(createGeolocationError(error));
     },
     {

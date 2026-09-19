@@ -77,4 +77,23 @@ describe("ルート検索APIクライアントのテスト", () => {
       type: "TIMEOUT",
     });
   });
+
+  it("成功レスポンスをJSONとして解析できない場合はINVALID_RESPONSEを返すこと", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => {
+          throw new SyntaxError("Unexpected token");
+        },
+      }),
+    );
+
+    await expect(
+      searchRoute(dummyLocation, dummyDistance, dummySeed),
+    ).rejects.toMatchObject({
+      type: "INVALID_RESPONSE",
+    });
+  });
 });

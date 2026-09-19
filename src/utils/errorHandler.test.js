@@ -8,6 +8,12 @@ describe("getSearchErrorMessage", () => {
     );
   });
 
+  it("不正なAPIレスポンスを通信エラーとして案内する", () => {
+    expect(getSearchErrorMessage({ type: "INVALID_RESPONSE" })).toBe(
+      "ルート検索APIから正しい応答を受け取れませんでした。もう一度お試しください。",
+    );
+  });
+
   it("位置情報エラーはエラー自身のメッセージを返す", () => {
     expect(
       getSearchErrorMessage({

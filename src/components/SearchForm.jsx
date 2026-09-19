@@ -12,7 +12,7 @@ function SearchForm({ distance, onDistanceChange, onSearch }) {
         <select
           id="distance"
           value={distance}
-          onChange={(event) => onDistanceChange(event.target.value)}
+          onChange={(event) => onDistanceChange(Number((event.target.value)))}
         >
           <option value={"5"}>5km</option>
           <option value={"8"}>8km</option>

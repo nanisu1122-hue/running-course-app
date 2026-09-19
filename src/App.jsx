@@ -44,12 +44,11 @@ function App() {
     setScreen("loading");
 
     try {
-      const location = await getCurrentLocation();
-      const start = location;
+      const start = await getCurrentLocation();
 
       const routes = [];
       for (const seed of [1, 2, 3]) {
-        const route = await searchRoute(location, distance, seed);
+        const route = await searchRoute(start, distance, seed);
         routes.push(route);
       }
 
@@ -57,7 +56,7 @@ function App() {
         formatRouteToCourse(routeResponse, index, start)
       );
 
-      setInitialLocation(location);
+      setInitialLocation(start);
       setCourses(newCourses);
       setScreen("courses");
     } catch (error) {
@@ -84,6 +83,8 @@ function App() {
     setError(null);
     isSearchingRef.current = false;
     resetLocation();
+    setCourses([]);
+    setSelectedCourse(null);
     setScreen("search");
   }
 

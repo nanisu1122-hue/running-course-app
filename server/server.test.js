@@ -56,6 +56,16 @@ describe("サーバーの自動テスト", () => {
     expect(res.body.type).toBe("INPUT");
   });
 
+  it("JSONのサイズ制限を超えた場合もJSON形式のエラーを返すこと", async () => {
+    const res = await request(app)
+      .post("/api/route")
+      .send({ payload: "a".repeat(110 * 1024) });
+
+    expect(res.status).toBe(413);
+    expect(res.headers["content-type"]).toMatch(/application\/json/);
+    expect(res.body.type).toBe("INPUT");
+  });
+
   it("ORS_API_KEY が未設定の場合は 500 と API_KEY_MISSING を返すこと", async () => {
     delete process.env.ORS_API_KEY;
 

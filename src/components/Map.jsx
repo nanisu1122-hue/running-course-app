@@ -1,4 +1,10 @@
-import { MapContainer, TileLayer, Polyline, Marker } from "react-leaflet";
+import {
+  CircleMarker,
+  MapContainer,
+  Marker,
+  Polyline,
+  TileLayer,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -24,6 +30,12 @@ function Map({
   currentLocation,
   screen,
 }) {
+  const shouldShowCurrentLocation =
+    currentLocation &&
+    (!startLocation ||
+      currentLocation.latitude !== startLocation.latitude ||
+      currentLocation.longitude !== startLocation.longitude);
+
   return (
     <MapContainer
       center={[35.681236, 139.767125]}
@@ -47,9 +59,16 @@ function Map({
       {startLocation && (
         <Marker position={[startLocation.latitude, startLocation.longitude]} />
       )}
-      {currentLocation && (
-        <Marker
-          position={[currentLocation.latitude, currentLocation.longitude]}
+      {shouldShowCurrentLocation && (
+        <CircleMarker
+          center={[currentLocation.latitude, currentLocation.longitude]}
+          radius={8}
+          pathOptions={{
+            color: "#0066cc",
+            fillColor: "#ffffff",
+            fillOpacity: 1,
+            weight: 3,
+          }}
         />
       )}
     </MapContainer>

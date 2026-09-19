@@ -12,7 +12,19 @@ export async function searchRoute(location, distance, seed) {
       }),
     });
 
-    const data = await response.json().catch(() => null);
+    let data = null;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      if (response.ok) {
+        const invalidResponseError = new Error(
+          "ルート検索APIから不正なレスポンスが返されました",
+          { cause: parseError },
+        );
+        invalidResponseError.type = "INVALID_RESPONSE";
+        throw invalidResponseError;
+      }
+    }
 
     if (!response.ok) {
       const error = new Error(

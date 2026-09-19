@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { describe, test } from 'vitest';
 
 describe('App', () => {
