@@ -18,7 +18,7 @@ function toFiniteNumber(value) {
 app.use(express.json());
 
 app.get("/api/health", (req, res) => {
-  res.status(200).json({ status: "ok" });//リクエストが受け取れるか確認
+  res.status(200).json({ status: "ok" });
 });
 
 app.post("/api/route", async (req, res) => {
@@ -106,7 +106,6 @@ app.post("/api/route", async (req, res) => {
   }
 });
 
-// エラーハンドリングミドルウェア
 app.use((error, req, res, next) => {
   if (error?.type === "entity.parse.failed") {
     return res.status(400).json({
@@ -137,9 +136,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-// NODE_ENVはどの環境で稼働しているかを表す
 if (process.env.NODE_ENV !== "test") {
-  // マシンが持つすべてのネットワークアドレスで受け付ける
   app.listen(3000, "0.0.0.0", () => {
     console.log("Server started: http://localhost:3000");
   });

@@ -18,7 +18,7 @@ describe("サーバーの自動テスト", () => {
   });
 
   it("GET /api/health で 200 と { status: 'ok' } を返すこと", async () => {
-    const res = await request(app).get("/api/health");//request(app)で疑似リクエストを送る
+    const res = await request(app).get("/api/health");
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ status: "ok" });

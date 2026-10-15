@@ -14,15 +14,12 @@ function RouteArrows({ routeCoordinates }) {
     const decorator = L.polylineDecorator(routeCoordinates, {
       patterns: [
         {
-          // 開始地点から10%先
           offset: "10%",
-          // 15%間隔
           repeat: "15%",
           symbol: L.Symbol.arrowHead({
             pixelSize: 12,
             polygon: false,
             pathOptions: {
-              // 輪郭線の有無
               stroke: true,
               color: "#0066cc",
             },

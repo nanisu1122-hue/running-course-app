@@ -39,6 +39,7 @@ export function useLocationWatcher(enabled, onError) {
     };
   }, [enabled]);
 
+  // 依存する値が変わらない限り、同じ参照を再利用する。
   const setInitialLocation = useCallback((location) => {
     setCurrentLocation(location);
   }, []);

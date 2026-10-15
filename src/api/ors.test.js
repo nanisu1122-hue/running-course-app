@@ -4,7 +4,7 @@ import { searchRoute } from "./ors.js";
 describe("ルート検索APIクライアントのテスト", () => {
   afterEach(() => {
     vi.unstubAllGlobals();//身代わりのリセット
-    vi.restoreAllMocks();//Mocksのリセット
+    vi.restoreAllMocks();
   });
 
   const dummyLocation = { latitude: 35.6812, longitude: 139.7671 };

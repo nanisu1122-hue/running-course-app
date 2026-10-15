@@ -18,7 +18,7 @@ describe("useLocationWatcher", () => {
 
   it("enabled=trueの場合に位置情報を受け取り、監視を開始する", () => {
     const location = { latitude: 35.6812, longitude: 139.7671 };
-    watchCurrentLocation.mockImplementation((onSuccess) => {//mockImplementationは処理内容をあとからぶち込む
+    watchCurrentLocation.mockImplementation((onSuccess) => {
       onSuccess(location);
       return 10;
     });
@@ -31,7 +31,7 @@ describe("useLocationWatcher", () => {
   });
 
   it("enabled=falseへの変更時に監視を解除し、その後のアンマウントで二重解除されないこと", () => {
-    watchCurrentLocation.mockReturnValue(10);//mockReturn返す固定値を設定する
+    watchCurrentLocation.mockReturnValue(10);
     const { rerender, unmount } = renderHook(
       ({ enabled }) => useLocationWatcher(enabled),
       { initialProps: { enabled: true } },

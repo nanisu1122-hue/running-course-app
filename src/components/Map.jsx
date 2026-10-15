@@ -15,9 +15,7 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import RouteArrows from "./RouteArrow";
 import FitRoute from "./FitRoute.jsx";
 
-// 自動推測メソッドの無効化
 delete L.Icon.Default.prototype._getIconUrl;
-// 画像パスの上書き
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
   iconUrl: markerIcon,
